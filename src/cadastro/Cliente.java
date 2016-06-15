@@ -10,27 +10,27 @@ package cadastro;
  * @author Masds
  */
 public class Cliente {
-    private String nome, endereço, senha, cep, telefone;
-    private int idade;
+    private String nome, endereço, senha, cep, telefone, sobrenome;
+    private int idade, ativo;
     
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public int getIdade() {
-        return idade;
+    
+    public String getSobrenome() {
+        return this.sobrenome;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getEndereço() {
-        return endereço;
+        return this.endereço;
     }
 
     public void setEndereço(String endereço) {
@@ -38,7 +38,7 @@ public class Cliente {
     }
 
     public String getSenha() {
-        return senha;
+        return this.senha;
     }
 
     public void setSenha(String senha) {
@@ -46,11 +46,19 @@ public class Cliente {
     }
 
     public String getCep() {
-        return cep;
+        return this.cep;
     }
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+    
+    public int getAtivo() {
+        return this.ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
     }
     
     

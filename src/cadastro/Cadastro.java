@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package cadastro;
+import javax.swing.JOptionPane;
 import main.Login;
 import utilitarios.Persistence;
 import utilitarios.data;
@@ -56,7 +57,7 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Novo Usuário");
 
         painel_princ.setBackground(new java.awt.Color(0, 204, 204));
@@ -175,7 +176,7 @@ public class Cadastro extends javax.swing.JFrame {
                     .addComponent(lb_sobrenome)
                     .addComponent(txt_sobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb_usuario)
                     .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
@@ -236,10 +237,19 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void bt_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrarActionPerformed
         Persistence conexao = new Persistence();
+        Cliente novo = new Cliente();
         conexao.criaConexao();
         conexao.fechaConexao();
-        
-        
+        if(!txt_nome.getText().isEmpty() && !txt_sobrenome.getText().isEmpty() && !txt_endereco.getText().isEmpty() && !txt_cep.getText().isEmpty() && !txt_senha.getText().isEmpty()){
+            novo.setNome(txt_nome.getText());
+            novo.setSobrenome(txt_sobrenome.getText());
+            novo.setEndereço(txt_endereco.getText());
+            novo.setCep(txt_cep.getText());
+            novo.setSenha(txt_senha.getText());
+            novo.setAtivo(1);
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor, verifique se há algum campo em branco!");
+        }
     }//GEN-LAST:event_bt_cadastrarActionPerformed
 
     /**
