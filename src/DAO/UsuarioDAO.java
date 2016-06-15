@@ -5,16 +5,21 @@
  */
 package DAO;
 
-import DAO.CadastroDAO;
+import cadastro.Cliente;
 
 /**
  *
  * @author Alisson
  */
-public class CadastroDAO {
+public class UsuarioDAO {
     
-    public void Adiciona(CadastroDAO usuario){
+    public void Adiciona(UsuarioDAO usuario){
         
+    }
+    
+    public Cliente busca(Cliente cliente){
+        
+        return cliente;
     }
     
 }

@@ -7,6 +7,7 @@ package main;
 import utilitarios.data;
 import javax.swing.*;
 import cadastro.Cadastro;
+import DAO.UsuarioDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
