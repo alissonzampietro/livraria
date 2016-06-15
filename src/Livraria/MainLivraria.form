@@ -12,24 +12,31 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_pesquisaActionPerformed"/>
           </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mn_itempesquisar">
+            <MenuItem class="javax.swing.JMenuItem" name="sb_itempesquisar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mn_itempesquisarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sb_itempesquisarActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menu_admin">
+        <Menu class="javax.swing.JMenu" name="menu_atualizar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Atualizar dados"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="sb_alterar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Alterar Cadastro"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="11111"/>
+            <Property name="text" type="java.lang.String" value="ADMIN"/>
           </Properties>
         </Menu>
       </SubComponents>
