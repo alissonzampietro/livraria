@@ -7,6 +7,10 @@ package main;
 import utilitarios.data;
 import javax.swing.*;
 import cadastro.Cadastro;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utilitarios.Persistence;
 /**
  *
@@ -39,12 +43,12 @@ public class Login extends javax.swing.JFrame {
         lb_usuario = new javax.swing.JLabel();
         lb_senha = new javax.swing.JLabel();
         txt_usuario = new javax.swing.JTextField();
-        txt_senha = new javax.swing.JTextField();
         lb_livraria = new javax.swing.JLabel();
         lb_msg = new javax.swing.JLabel();
         bt_registro = new javax.swing.JButton();
         lb_data = new javax.swing.JLabel();
         bt_sair = new javax.swing.JButton();
+        txt_senha = new javax.swing.JPasswordField();
 
         timer1.addTimerListener(new org.netbeans.examples.lib.timerbean.TimerListener() {
             public void onTime(java.awt.event.ActionEvent evt) {
@@ -71,8 +75,6 @@ public class Login extends javax.swing.JFrame {
         lb_senha.setText("Senha:");
 
         txt_usuario.setToolTipText("Insira o nome do usuário");
-
-        txt_senha.setToolTipText("Insira a senha do usuário.");
 
         lb_livraria.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lb_livraria.setText("SISTEMA LIVRARIA");
@@ -147,8 +149,8 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(lb_usuario))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(Painel_secLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lb_senha))
+                            .addComponent(lb_senha)
+                            .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)
                         .addGroup(Painel_secLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bt_entrar)
@@ -217,22 +219,32 @@ public class Login extends javax.swing.JFrame {
     private void bt_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_entrarActionPerformed
         Persistence conexao = new Persistence();
         conexao.criaConexao();
-        conexao.executaSQL("select * from login");
-        if(txt_usuario.getText().equals("") || txt_senha.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Você deve informar um usuarío e uma senha para entrar!");
+        ResultSet retornoQuery = conexao.executaSQL("select * from usuarios where ativo = 1 and fk_tipo_usuario = 1");
+        try {
+            retornoQuery.first();
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(!"".equals(txt_usuario.getText()) || txt_senha.getText() != ""){
+            try {
+                if(txt_usuario.getText().equals(retornoQuery.getString("login")) && txt_senha.getText().equals(retornoQuery.getString("senha"))){
+                    new Livraria.MainLivraria().setVisible(true);
+                    JOptionPane.showMessageDialog(null, "Bem vindo "+txt_usuario.getText());
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Acesso NEGADO");
+                    txt_usuario.setText("");
+                    txt_senha.setText("");
+                    
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
-        if (txt_usuario.getText().equals("Masds")){
-           if(txt_senha.getText().equals("123")){
-                new Livraria.MainLivraria().setVisible(true);
-                JOptionPane.showMessageDialog(null, "Bem-Vindo " +txt_usuario.getText());
-                this.dispose();
-           }else{
-            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
+            JOptionPane.showMessageDialog(null, "Por favor, verifique se há algum campo em branco!");
+            txt_usuario.setText("");
+            txt_senha.setText("");
         }
-           }else{
-            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
-        }
-       }
     }//GEN-LAST:event_bt_entrarActionPerformed
 
 
@@ -256,7 +268,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lb_senha;
     private javax.swing.JLabel lb_usuario;
     private org.netbeans.examples.lib.timerbean.Timer timer1;
-    private javax.swing.JTextField txt_senha;
+    private javax.swing.JPasswordField txt_senha;
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }

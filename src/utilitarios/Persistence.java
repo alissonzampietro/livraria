@@ -102,12 +102,14 @@ public class Persistence {
     }
     
     public ResultSet executaSQL(String sql){
+        
         try {
             statement = conexao.createStatement();
             resultset = statement.executeQuery(sql);
-            return resultset;
         } catch (SQLException ex) {
+            resultset = null;
             JOptionPane.showMessageDialog(null, "Não foi possivel executar o comando SQL: "+ex.getMessage()+" Comando: "+sql);
         }
+        return resultset;
     }      
 }
