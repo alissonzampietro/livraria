@@ -221,30 +221,24 @@ public class Login extends javax.swing.JFrame {
         conexao.criaConexao();
         ResultSet retornoQuery = conexao.executaSQL("select * from usuarios where login = '" + txt_usuario.getText() + "' and senha = '" + txt_senha.getText() + "' and ativo = 1 and fk_tipo_usuario = 1");
         try {
-            retornoQuery.first();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Usuário não encontrado");
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(!"".equals(txt_usuario.getText()) || txt_senha.getText() != ""){
-            try {
-                if(txt_usuario.getText().equals(retornoQuery.getString("login")) && txt_senha.getText().equals(retornoQuery.getString("senha"))){
+            Boolean teste = retornoQuery.first();
+            if(teste){
+                if(!"".equals(txt_usuario.getText()) || !"".equals(txt_senha.getText())){
                     new Livraria.MainLivraria().setVisible(true);
                     JOptionPane.showMessageDialog(null, "Bem vindo "+txt_usuario.getText());
                     this.dispose();
                 }else{
-                    JOptionPane.showMessageDialog(null, "Acesso NEGADO");
+                    JOptionPane.showMessageDialog(null, "Por favor, verifique se há algum campo em branco!");
                     txt_usuario.setText("");
                     txt_senha.setText("");
-                    
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
+                txt_usuario.setText("");
+                txt_senha.setText("");
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Por favor, verifique se há algum campo em branco!");
-            txt_usuario.setText("");
-            txt_senha.setText("");
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bt_entrarActionPerformed
 
