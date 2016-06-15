@@ -219,10 +219,11 @@ public class Login extends javax.swing.JFrame {
     private void bt_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_entrarActionPerformed
         Persistence conexao = new Persistence();
         conexao.criaConexao();
-        ResultSet retornoQuery = conexao.executaSQL("select * from usuarios where ativo = 1 and fk_tipo_usuario = 1");
+        ResultSet retornoQuery = conexao.executaSQL("select * from usuarios where login = '" + txt_usuario.getText() + "' and senha = '" + txt_senha.getText() + "' and ativo = 1 and fk_tipo_usuario = 1");
         try {
             retornoQuery.first();
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Usuário não encontrado");
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(!"".equals(txt_usuario.getText()) || txt_senha.getText() != ""){
