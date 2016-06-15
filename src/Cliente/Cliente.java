@@ -10,7 +10,7 @@ package Cliente;
  * @author Masds
  */
 public class Cliente {
-    private String nome, endereço, senha, cep, telefone, sobrenome;
+    private String nome, endereço, senha, cep, telefone, sobrenome, cpf, login;
     private int idade, ativo;
     
     public String getNome() {
@@ -36,6 +36,14 @@ public class Cliente {
     public void setEndereço(String endereço) {
         this.endereço = endereço;
     }
+    
+    public String getLogin() {
+        return this.login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
     public String getSenha() {
         return this.senha;
@@ -43,6 +51,14 @@ public class Cliente {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+    
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getCep() {

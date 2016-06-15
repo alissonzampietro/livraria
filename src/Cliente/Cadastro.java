@@ -7,7 +7,9 @@ package Cliente;
 import javax.swing.JOptionPane;
 import main.Login;
 import DAO.Persistence;
+import DAO.UsuarioDAO;
 import utilitarios.data;
+import Cliente.Cliente;
 
 /**
  *
@@ -50,6 +52,8 @@ public class Cadastro extends javax.swing.JFrame {
         txt_sobrenome = new javax.swing.JTextField();
         txt_senha = new javax.swing.JTextField();
         lb_cep1 = new javax.swing.JLabel();
+        txt_cpf = new javax.swing.JTextField();
+        lb_usuario1 = new javax.swing.JLabel();
 
         timer2.addTimerListener(new org.netbeans.examples.lib.timerbean.TimerListener() {
             public void onTime(java.awt.event.ActionEvent evt) {
@@ -109,6 +113,14 @@ public class Cadastro extends javax.swing.JFrame {
 
         lb_cep1.setText("CEP:");
 
+        txt_cpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cpfActionPerformed(evt);
+            }
+        });
+
+        lb_usuario1.setText("CPF:");
+
         javax.swing.GroupLayout painel_princLayout = new javax.swing.GroupLayout(painel_princ);
         painel_princ.setLayout(painel_princLayout);
         painel_princLayout.setHorizontalGroup(
@@ -119,27 +131,23 @@ public class Cadastro extends javax.swing.JFrame {
                         .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(painel_princLayout.createSequentialGroup()
                                 .addGap(59, 59, 59)
-                                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lb_endereco)
-                                    .addComponent(lb_senha)
-                                    .addComponent(lb_usuario)
-                                    .addComponent(lb_sobrenome)
-                                    .addComponent(lb_cep1)))
+                                .addComponent(lb_sobrenome))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_princLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lb_nome)))
+                                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lb_nome, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lb_usuario1, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addGap(18, 18, 18)
                         .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_cep, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_sobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(painel_princLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(bt_voltar)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addComponent(bt_voltar)
+                        .addGap(101, 101, 101)
+                        .addComponent(bt_cadastrar)))
+                .addContainerGap(128, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_princLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,32 +158,49 @@ public class Cadastro extends javax.swing.JFrame {
                         .addComponent(lb_data)
                         .addGap(110, 110, 110))))
             .addGroup(painel_princLayout.createSequentialGroup()
-                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painel_princLayout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(lb_msg))
-                    .addGroup(painel_princLayout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(bt_cadastrar)))
+                .addGap(86, 86, 86)
+                .addComponent(lb_msg)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_princLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lb_endereco)
+                    .addComponent(lb_senha)
+                    .addComponent(lb_usuario)
+                    .addComponent(lb_cep1))
+                .addGap(18, 18, 18)
+                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_cep, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
         );
         painel_princLayout.setVerticalGroup(
             painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painel_princLayout.createSequentialGroup()
                 .addComponent(lb_data)
-                .addGap(28, 28, 28)
-                .addComponent(lb_cadastro)
-                .addGap(18, 18, 18)
-                .addComponent(lb_msg, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_nome))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_sobrenome)
-                    .addComponent(txt_sobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painel_princLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(lb_cadastro)
+                        .addGap(18, 18, 18)
+                        .addComponent(lb_msg, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_nome))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_sobrenome)
+                            .addComponent(txt_sobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29))
+                    .addGroup(painel_princLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_usuario1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb_usuario)
                     .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -191,10 +216,10 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_cep1)
                     .addComponent(txt_cep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(bt_cadastrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_voltar)
+                .addGap(27, 27, 27)
+                .addGroup(painel_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_voltar)
+                    .addComponent(bt_cadastrar))
                 .addGap(71, 71, 71))
         );
 
@@ -236,21 +261,25 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_usuarioActionPerformed
 
     private void bt_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrarActionPerformed
-        Persistence conexao = new Persistence();
         Cliente novo = new Cliente();
-        conexao.criaConexao();
-        conexao.fechaConexao();
-        if(!txt_nome.getText().isEmpty() && !txt_sobrenome.getText().isEmpty() && !txt_endereco.getText().isEmpty() && !txt_cep.getText().isEmpty() && !txt_senha.getText().isEmpty()){
+        if(!txt_usuario.getText().isEmpty() && !txt_nome.getText().isEmpty() && !txt_sobrenome.getText().isEmpty() && !txt_endereco.getText().isEmpty() && !txt_cep.getText().isEmpty() && !txt_senha.getText().isEmpty()){
             novo.setNome(txt_nome.getText());
+            novo.setLogin(txt_usuario.getText());
             novo.setSobrenome(txt_sobrenome.getText());
             novo.setEndereço(txt_endereco.getText());
+            novo.setCpf(txt_cpf.getText());
             novo.setCep(txt_cep.getText());
             novo.setSenha(txt_senha.getText());
-            novo.setAtivo(1);
+            UsuarioDAO cadastrar = new UsuarioDAO();
+            cadastrar.adiciona(novo);
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, verifique se há algum campo em branco!");
         }
     }//GEN-LAST:event_bt_cadastrarActionPerformed
+
+    private void txt_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cpfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,9 +304,11 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JLabel lb_senha;
     private javax.swing.JLabel lb_sobrenome;
     private javax.swing.JLabel lb_usuario;
+    private javax.swing.JLabel lb_usuario1;
     private javax.swing.JPanel painel_princ;
     private org.netbeans.examples.lib.timerbean.Timer timer2;
     private javax.swing.JTextField txt_cep;
+    private javax.swing.JTextField txt_cpf;
     private javax.swing.JTextField txt_endereco;
     private javax.swing.JTextField txt_nome;
     private javax.swing.JTextField txt_senha;
