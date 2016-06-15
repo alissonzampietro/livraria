@@ -5,7 +5,7 @@
  */
 package Livraria;
 import java.sql.ResultSet;
-import utilitarios.Persistence;
+import DAO.Persistence;
 
 /**
  *

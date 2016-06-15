@@ -6,13 +6,13 @@
 package main;
 import utilitarios.data;
 import javax.swing.*;
-import cadastro.Cadastro;
+import Cliente.Cadastro;
 import DAO.UsuarioDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utilitarios.Persistence;
+import DAO.Persistence;
 /**
  *
  * @author Masds
@@ -209,7 +209,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_sairActionPerformed
 
     private void bt_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_registroActionPerformed
-        new cadastro.Cadastro().show();
+        new Cliente.Cadastro().show();
         this.dispose();
     }//GEN-LAST:event_bt_registroActionPerformed
 

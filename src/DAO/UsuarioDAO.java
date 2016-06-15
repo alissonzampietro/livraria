@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import cadastro.Cliente;
+import Cliente.Cliente;
 
 /**
  *
