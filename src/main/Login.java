@@ -225,7 +225,7 @@ public class Login extends javax.swing.JFrame {
             Boolean teste = retornoQuery.first();
             if(teste){
                 if(!"".equals(txt_usuario.getText()) || !"".equals(txt_senha.getText())){
-                    new Livraria.MainLivraria().setVisible(true);
+                    new Livro.MainLivro().setVisible(true);
                     JOptionPane.showMessageDialog(null, "Bem vindo "+txt_usuario.getText());
                     this.dispose();
                 }else{
