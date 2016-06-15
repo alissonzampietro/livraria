@@ -28,8 +28,9 @@ public class MainLivraria extends javax.swing.JFrame {
         dt_princ = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_pesquisa = new javax.swing.JMenu();
-        mn_itempesquisar = new javax.swing.JMenuItem();
-        menu_admin = new javax.swing.JMenu();
+        sb_itempesquisar = new javax.swing.JMenuItem();
+        menu_atualizar = new javax.swing.JMenu();
+        sb_alterar = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,20 +53,24 @@ public class MainLivraria extends javax.swing.JFrame {
             }
         });
 
-        mn_itempesquisar.setText("Pesquisar");
-        mn_itempesquisar.addActionListener(new java.awt.event.ActionListener() {
+        sb_itempesquisar.setText("Pesquisar");
+        sb_itempesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_itempesquisarActionPerformed(evt);
+                sb_itempesquisarActionPerformed(evt);
             }
         });
-        menu_pesquisa.add(mn_itempesquisar);
+        menu_pesquisa.add(sb_itempesquisar);
 
         jMenuBar1.add(menu_pesquisa);
 
-        menu_admin.setText("Atualizar dados");
-        jMenuBar1.add(menu_admin);
+        menu_atualizar.setText("Atualizar dados");
 
-        jMenu1.setText("11111");
+        sb_alterar.setText("Alterar Cadastro");
+        menu_atualizar.add(sb_alterar);
+
+        jMenuBar1.add(menu_atualizar);
+
+        jMenu1.setText("ADMIN");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -92,7 +97,7 @@ public class MainLivraria extends javax.swing.JFrame {
 
     }//GEN-LAST:event_menu_pesquisaActionPerformed
 
-    private void mn_itempesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_itempesquisarActionPerformed
+    private void sb_itempesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sb_itempesquisarActionPerformed
         JintPesquisar internal_1 = JintPesquisar.getInstance();
         for(JInternalFrame f : dt_princ.getAllFrames()){
             if (f.equals(internal_1)){
@@ -102,7 +107,7 @@ public class MainLivraria extends javax.swing.JFrame {
         }
         dt_princ.add(internal_1);
         internal_1.setVisible(true);
-    }//GEN-LAST:event_mn_itempesquisarActionPerformed
+    }//GEN-LAST:event_sb_itempesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,8 +148,9 @@ public class MainLivraria extends javax.swing.JFrame {
     private javax.swing.JDesktopPane dt_princ;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu menu_admin;
+    private javax.swing.JMenu menu_atualizar;
     private javax.swing.JMenu menu_pesquisa;
-    private javax.swing.JMenuItem mn_itempesquisar;
+    private javax.swing.JMenuItem sb_alterar;
+    private javax.swing.JMenuItem sb_itempesquisar;
     // End of variables declaration//GEN-END:variables
 }
