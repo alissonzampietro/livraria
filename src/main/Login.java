@@ -240,6 +240,7 @@ public class Login extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+        conexao.fechaConexao();
     }//GEN-LAST:event_bt_entrarActionPerformed
 
 

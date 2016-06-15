@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Livraria;
+import javax.swing.*;
 
 /**
  *
@@ -24,29 +25,48 @@ public class MainLivraria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        dt_princ = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_pesquisa = new javax.swing.JMenu();
+        mn_itempesquisar = new javax.swing.JMenuItem();
         menu_admin = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 667, Short.MAX_VALUE)
+        javax.swing.GroupLayout dt_princLayout = new javax.swing.GroupLayout(dt_princ);
+        dt_princ.setLayout(dt_princLayout);
+        dt_princLayout.setHorizontalGroup(
+            dt_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 901, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 375, Short.MAX_VALUE)
+        dt_princLayout.setVerticalGroup(
+            dt_princLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 504, Short.MAX_VALUE)
         );
 
         menu_pesquisa.setText("Pesquisa");
+        menu_pesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_pesquisaActionPerformed(evt);
+            }
+        });
+
+        mn_itempesquisar.setText("Pesquisar");
+        mn_itempesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_itempesquisarActionPerformed(evt);
+            }
+        });
+        menu_pesquisa.add(mn_itempesquisar);
+
         jMenuBar1.add(menu_pesquisa);
 
-        menu_admin.setText("ADMIN");
+        menu_admin.setText("Atualizar dados");
         jMenuBar1.add(menu_admin);
+
+        jMenu1.setText("11111");
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -54,17 +74,35 @@ public class MainLivraria extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(dt_princ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 19, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(dt_princ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menu_pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_pesquisaActionPerformed
+
+    }//GEN-LAST:event_menu_pesquisaActionPerformed
+
+    private void mn_itempesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_itempesquisarActionPerformed
+        JintPesquisar internal_1 = JintPesquisar.getInstance();
+        for(JInternalFrame f : dt_princ.getAllFrames()){
+            if (f.equals(internal_1)){
+                internal_1.setVisible(true);
+                return;
+            }
+        }
+        dt_princ.add(internal_1);
+        internal_1.setVisible(true);
+    }//GEN-LAST:event_mn_itempesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,9 +140,11 @@ public class MainLivraria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane dt_princ;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menu_admin;
     private javax.swing.JMenu menu_pesquisa;
+    private javax.swing.JMenuItem mn_itempesquisar;
     // End of variables declaration//GEN-END:variables
 }
