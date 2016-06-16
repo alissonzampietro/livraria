@@ -9,6 +9,7 @@ import DAO.Persistence;
 import java.sql.SQLException;
 import DAO.AutorDAO;
 import DAO.CategoriaDAO;
+import DAO.EditoraDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -206,6 +207,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
     private void bt_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pesquisarActionPerformed
         Integer idAutor = null;
         Integer idCategoria = null;
+        Integer idEditora = null;
         String campo = "";
         String categoria = (String) cb_categorias.getSelectedItem();
         System.out.println(cb_categorias.getSelectedItem());
@@ -220,11 +222,20 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         }
         
         if(rad_editora.isSelected()){
-            campo = "editora";
+            EditoraDAO editora = new EditoraDAO();
+            try {
+                idEditora = editora.retornaId(rad_editora.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if(rad_autor.isSelected()){
             AutorDAO autor = new AutorDAO();
-            idAutor = autor.retornaId(rad_autor.getText());
+            try {
+                idAutor = autor.retornaId(rad_autor.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         Persistence conexao = new Persistence();
         conexao.criaConexao();
