@@ -19,6 +19,14 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
     public JintPesquisar() {
         initComponents();
     }
+    
+    private static JintPesquisar form=null;
+    public static JintPesquisar getInstance(){
+        if(form == null){
+            form = new JintPesquisar();
+        }
+        return form;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,21 +37,44 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txt_pesquisar = new javax.swing.JTextField();
-        bt_pesquisar = new javax.swing.JButton();
-        lb_infoprinc = new javax.swing.JLabel();
-        rad_editora = new javax.swing.JRadioButton();
-        rad_livro = new javax.swing.JRadioButton();
-        lb_categoria = new javax.swing.JLabel();
+        grouptipo = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
         lb_tipopesquisa = new javax.swing.JLabel();
+        rad_livro = new javax.swing.JRadioButton();
+        rad_editora = new javax.swing.JRadioButton();
+        lb_infoprinc = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         cb_categorias = new javax.swing.JComboBox<>();
+        bt_pesquisar = new javax.swing.JButton();
+        lb_categoria = new javax.swing.JLabel();
+        txt_pesquisar = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
-        setTitle("PESQUISAR LIVRO");
+        setTitle("PESQUISAR");
 
-        txt_pesquisar.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBackground(new java.awt.Color(255, 255, 102));
+
+        lb_tipopesquisa.setText("Selecione o que deseja pesquisar:");
+
+        rad_livro.setBackground(new java.awt.Color(255, 255, 102));
+        grouptipo.add(rad_livro);
+        rad_livro.setText("TÍTULO");
+
+        rad_editora.setBackground(new java.awt.Color(255, 255, 102));
+        grouptipo.add(rad_editora);
+        rad_editora.setText("EDITORA");
+
+        lb_infoprinc.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lb_infoprinc.setText("Pesquisar");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setText("após isto, selecione a categoria, digite o Titulo/Nome da Editora e clique em pesquisar");
+
+        cb_categorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "HQ", "ROMANCE", "DRAMA." }));
+        cb_categorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_pesquisarActionPerformed(evt);
+                cb_categoriasActionPerformed(evt);
             }
         });
 
@@ -54,66 +85,98 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
             }
         });
 
-        lb_infoprinc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lb_infoprinc.setText("INSIRA O NOME DO LIVRO OU EDITORA E ESPECIFIQUE A CATEGORIA");
-
-        rad_editora.setText("EDITORA");
-
-        rad_livro.setText("TÍTULO");
-
         lb_categoria.setText("Categoria:");
 
-        lb_tipopesquisa.setText("Selecione o que deseja pesquisar:");
-
-        cb_categorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "HQ", "ROMANCE", "DRAMA." }));
-        cb_categorias.addActionListener(new java.awt.event.ActionListener() {
+        txt_pesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_categoriasActionPerformed(evt);
+                txt_pesquisarActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setText("Para pesquisar, primeiro selecione se quer pesquisar por EDITORA ou TÍTULO,");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(rad_editora)
+                                .addGap(8, 8, 8)
+                                .addComponent(rad_livro)
+                                .addGap(18, 18, 18)
+                                .addComponent(lb_categoria)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cb_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lb_tipopesquisa)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(277, 277, 277)
+                        .addComponent(lb_infoprinc)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lb_infoprinc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bt_pesquisar)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lb_categoria)
+                                .addComponent(cb_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lb_tipopesquisa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rad_livro)
+                            .addComponent(rad_editora))))
+                .addContainerGap(270, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lb_tipopesquisa)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(rad_livro)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(rad_editora)
-                            .addGap(69, 69, 69)
-                            .addComponent(lb_categoria)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cb_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(lb_infoprinc)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lb_infoprinc)
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_tipopesquisa)
-                    .addComponent(rad_editora)
-                    .addComponent(rad_livro)
-                    .addComponent(cb_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_categoria))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_pesquisar)
-                    .addComponent(txt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -141,17 +204,13 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_pesquisarActionPerformed
 
-    private static JintPesquisar form=null;
-    public static JintPesquisar getInstance(){
-        if(form == null){
-            form = new JintPesquisar();
-        }
-        return form;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_pesquisar;
     private javax.swing.JComboBox<String> cb_categorias;
+    private javax.swing.ButtonGroup grouptipo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lb_categoria;
     private javax.swing.JLabel lb_infoprinc;
     private javax.swing.JLabel lb_tipopesquisa;

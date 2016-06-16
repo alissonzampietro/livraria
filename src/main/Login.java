@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import DAO.Persistence;
+import java.awt.Toolkit;
 /**
  *
  * @author Masds
@@ -20,6 +21,7 @@ import DAO.Persistence;
 public class Login extends javax.swing.JFrame {
     data mostra_data;
     int count = 0;
+
 
     public Login() {
         initComponents();
@@ -59,6 +61,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");
+        setResizable(false);
 
         Painel_principal.setName("Login"); // NOI18N
 
@@ -268,4 +271,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txt_senha;
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
+
+
 }
