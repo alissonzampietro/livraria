@@ -208,12 +208,13 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         Integer idAutor = null;
         Integer idCategoria = null;
         Integer idEditora = null;
-        String campo = "";
         String categoria = (String) cb_categorias.getSelectedItem();
         System.out.println(cb_categorias.getSelectedItem());
         String consultaBase = "select * from livros l";
+        String consultaComplementar = "";
         String condicional = "where ";
         String join = "";
+        String complementar = "";
         if (!"TODOS".equals(categoria)){
             CategoriaDAO cat = new CategoriaDAO();
             try {
@@ -222,6 +223,15 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
                 Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
             }
             join += " inner join livros_x_categoria lc on l.idLivro = lc.fk_livro";
+            condicional += "lc.fk_categoria = '" + idCategoria + "'";
+        }
+        
+        if(idCategoria == null){
+            complementar = " and ";
+        }
+        
+        if(rad_livro.isSelected()){
+            condicional += "l.titulo like '" + rad_livro.getText() + "'";
         }
         
         if(rad_editora.isSelected()){
@@ -232,6 +242,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
                 Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
             }
             join += " inner join livros_x_editora le on l.idLivro = le.fk_livro";
+            condicional += "le.fk_editora = '" + idEditora + "'";
         }
         if(rad_autor.isSelected()){
             AutorDAO autor = new AutorDAO();
@@ -241,10 +252,16 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
                 Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
             }
             join += " inner join livros_x_autor la on l.idLivro = la.fk_livro";
+            condicional += "la.fk_autor = '" + idAutor + "'";
         }
+        
+        consultaComplementar = consultaBase + join + complementar + condicional;
         Persistence conexao = new Persistence();
         conexao.criaConexao();
-        ResultSet retornoQuery = conexao.executaSQL("select * from livros where " + campo + " = '" +txt_pesquisar.getText()+"' and categoria='"+cb_categorias.getSelectedItem()+"'");
+        ResultSet retornoQuery = conexao.executaSQL(consultaComplementar);
+        while(retornoQuery.next()){
+            
+        }
     }//GEN-LAST:event_bt_pesquisarActionPerformed
 
     private void txt_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_pesquisarActionPerformed
