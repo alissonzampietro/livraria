@@ -22,7 +22,7 @@ public class Login extends javax.swing.JFrame {
     int count = 0;
 
     public Login() {
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(getRootPane());
         initComponents();
         carrega_hora();
         timer1.start();

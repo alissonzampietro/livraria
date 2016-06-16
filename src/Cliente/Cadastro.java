@@ -19,7 +19,7 @@ public class Cadastro extends javax.swing.JFrame {
     String Hora;
     public Cadastro() {
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(getRootPane());
         carrega_hora();
         timer2.start();
     }
