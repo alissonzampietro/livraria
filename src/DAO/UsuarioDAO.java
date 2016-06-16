@@ -28,6 +28,14 @@ public class UsuarioDAO {
             stmt.setString(4, usuario.getSobrenome());
             stmt.setString(5, usuario.getCpf());
             retorno = stmt.execute();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    user.setId(generatedKeys.getLong(1));
+                }
+                else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+            }
         } catch (SQLException u) {
             throw new RuntimeException(u);
         }

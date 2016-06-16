@@ -104,6 +104,10 @@ public class Persistence {
         return this.conexao.createStatement();
     }
     
+    public ResultSet retornarResultSet() throws SQLException{
+        return this.resultset;
+    }
+    
     public ResultSet executaSQL(String sql){
         
         try {
