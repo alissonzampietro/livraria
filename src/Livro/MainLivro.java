@@ -7,6 +7,9 @@ package Livro;
 import Cliente.Atualiza;
 import javax.swing.*;
 import Form_cadastro.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -185,15 +188,19 @@ public class MainLivro extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_principalActionPerformed
 
     private void sb_itempesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sb_itempesquisarActionPerformed
-        JintPesquisar internal_1 = JintPesquisar.getInstance();
-        for(JInternalFrame a : dt_princ.getAllFrames()){
-            if (a.equals(internal_1)){
-                internal_1.setVisible(true);
-                return;
+        try {
+            JintPesquisar internal_1 = JintPesquisar.getInstance();
+            for(JInternalFrame a : dt_princ.getAllFrames()){
+                if (a.equals(internal_1)){
+                    internal_1.setVisible(true);
+                    return;
+                }
             }
+            dt_princ.add(internal_1);
+            internal_1.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainLivro.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dt_princ.add(internal_1);
-        internal_1.setVisible(true);
     }//GEN-LAST:event_sb_itempesquisarActionPerformed
 
     private void menu_atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_atualizarActionPerformed
