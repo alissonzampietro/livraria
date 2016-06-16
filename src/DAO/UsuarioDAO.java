@@ -6,7 +6,9 @@
 package DAO;
 
 import Cliente.Cliente;
+import Cliente.Endereco;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -16,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class UsuarioDAO {
 
-    public Boolean inserir(Cliente usuario) {
+    public Boolean inserir(Cliente usuario, Endereco endereco) {
         Boolean retorno;
         Persistence conexao = new Persistence();
         conexao.criaConexao();
@@ -28,6 +30,7 @@ public class UsuarioDAO {
             stmt.setString(4, usuario.getSobrenome());
             stmt.setString(5, usuario.getCpf());
             retorno = stmt.execute();
+            this.retornaUltimaInsercao(conexao);
         } catch (SQLException u) {
             throw new RuntimeException(u);
         }
@@ -35,8 +38,13 @@ public class UsuarioDAO {
         return retorno;
     }
     
-    public void retornaUltimaInsercao(){
-        
+    private Integer retornaUltimaInsercao(Persistence conexao) throws SQLException{
+        Integer retorno = null;
+        ResultSet retornoQuery = conexao.executaSQL("select * from usuarios order by id_usuario desc");
+        if(retornoQuery.next()) {
+            retorno = retornoQuery.getInt(1);
+        }
+        return retorno;
     }
 
 }

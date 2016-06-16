@@ -39,6 +39,19 @@ CREATE TABLE IF NOT EXISTS `categoria` (
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 
 
+-- Copiando estrutura para tabela db_livraria.editora
+CREATE TABLE IF NOT EXISTS `editora` (
+  `id_editora` int(11) NOT NULL AUTO_INCREMENT,
+  `cnpj` varchar(50) DEFAULT '0',
+  `nome` varchar(50) DEFAULT '0',
+  PRIMARY KEY (`id_editora`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Copiando dados para a tabela db_livraria.editora: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `editora` DISABLE KEYS */;
+/*!40000 ALTER TABLE `editora` ENABLE KEYS */;
+
+
 -- Copiando estrutura para tabela db_livraria.endereco_usuario
 CREATE TABLE IF NOT EXISTS `endereco_usuario` (
   `id_endereco` int(11) NOT NULL AUTO_INCREMENT,
@@ -59,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `endereco_usuario` (
 CREATE TABLE IF NOT EXISTS `livros` (
   `id_livro` int(11) NOT NULL AUTO_INCREMENT,
   `fk_editora` int(11) NOT NULL DEFAULT '0',
+  `especificacoes` text NOT NULL,
   `isbn` varchar(50) NOT NULL DEFAULT '0',
   `titulo` varchar(255) NOT NULL DEFAULT '0',
   `preco` float NOT NULL DEFAULT '0',
@@ -100,25 +114,29 @@ CREATE TABLE IF NOT EXISTS `livro_x_categoria` (
 -- Copiando estrutura para tabela db_livraria.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `fk_tipo_usuario` int(11) NOT NULL DEFAULT '1',
   `login` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `nome_usuario` varchar(255) NOT NULL,
   `sobrenome_usuario` varchar(255) NOT NULL,
   `cpf` varchar(50) NOT NULL,
+  `fk_tipo_usuario` int(11) NOT NULL DEFAULT '1',
   `data_cadastro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ativo` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela db_livraria.usuarios: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela db_livraria.usuarios: ~9 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-REPLACE INTO `usuarios` (`id_usuario`, `fk_tipo_usuario`, `login`, `senha`, `nome_usuario`, `sobrenome_usuario`, `cpf`, `data_cadastro`, `ativo`) VALUES
-	(1, 1, 'alisson', 'alisson299409', 'Alisson Zampietro', '', '', '0000-00-00 00:00:00', 1),
-	(2, 1, 'luana', '123456', 'Luana', '', '', '0000-00-00 00:00:00', 1),
-	(3, 1, 'aline', 'aline', 'Aline', 'Ferreira', '', '2016-06-15 18:21:39', 1),
-	(6, 1, 'zaroio', '123456', 'Lucas', 'Polaquini', '35777126866', '2016-06-15 20:38:13', 1),
-	(7, 1, 'jelops', '123456', 'Jéssica', 'Lopes', '2154689858', '2016-06-15 20:48:24', 1);
+REPLACE INTO `usuarios` (`id_usuario`, `login`, `senha`, `nome_usuario`, `sobrenome_usuario`, `cpf`, `fk_tipo_usuario`, `data_cadastro`, `ativo`) VALUES
+	(1, 'alisson', 'alisson299409', 'Alisson Zampietro', '', '', 1, '0000-00-00 00:00:00', 1),
+	(2, 'luana', '123456', 'Luana', '', '', 1, '0000-00-00 00:00:00', 1),
+	(3, 'aline', 'aline', 'Aline', 'Ferreira', '', 1, '2016-06-15 18:21:39', 1),
+	(6, 'zaroio', '123456', 'Lucas', 'Polaquini', '35777126866', 1, '2016-06-15 20:38:13', 1),
+	(7, 'jelops', '123456', 'Jéssica', 'Lopes', '2154689858', 1, '2016-06-15 20:48:24', 1),
+	(13, 'uiahs', 'iuahs', 'asuas', 'uiahs', 'auihs', 1, '2016-06-15 23:23:34', 1),
+	(14, 'aoisj', 'aijs', 'asas', 'iajs', 'aiojs', 1, '2016-06-15 23:32:23', 1),
+	(15, 'aiush', 'iaush', 'ash', 'asuh', 'aisuh', 1, '2016-06-15 23:39:01', 1),
+	(16, 'auhs', 'aiush', 'asj', 'auuhs', 'uahs', 1, '2016-06-15 23:48:46', 1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

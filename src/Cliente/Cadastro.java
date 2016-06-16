@@ -264,6 +264,7 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void bt_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrarActionPerformed
         Cliente novo = new Cliente();
+        Endereco local = new Endereco();
         if(!txt_usuario.getText().isEmpty() && !txt_nome.getText().isEmpty() && !txt_sobrenome.getText().isEmpty() && !txt_endereco.getText().isEmpty() && !txt_cep.getText().isEmpty() && !txt_senha.getText().isEmpty()){
             novo.setNome(txt_nome.getText());
             novo.setLogin(txt_usuario.getText());
@@ -272,8 +273,10 @@ public class Cadastro extends javax.swing.JFrame {
             novo.setCpf(txt_cpf.getText());
             novo.setCep(txt_cep.getText());
             novo.setSenha(txt_senha.getText());
+            local.setEndereco(txt_endereco.getText());
+            local.setCep(txt_cep.getText());
             UsuarioDAO cadastrar = new UsuarioDAO();
-            cadastrar.inserir(novo);
+            cadastrar.inserir(novo,local);
             JOptionPane.showMessageDialog(null, "USUARIO CADASTRADO COM SUCESSO!");
             this.limpaForm();
         }else{
