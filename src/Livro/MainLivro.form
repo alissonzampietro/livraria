@@ -52,6 +52,31 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="ADMIN"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="sb_cadautor">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Autor"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sb_cadautorActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="sb_cadlivro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Livro"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="sb_cadeditora">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Editora"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="sv_geruser">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gerenciar usu&#xe1;rio"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>

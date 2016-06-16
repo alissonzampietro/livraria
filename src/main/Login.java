@@ -24,8 +24,8 @@ public class Login extends javax.swing.JFrame {
 
 
     public Login() {
-        setLocationRelativeTo(getRootPane());
         initComponents();
+        setLocationRelativeTo(getRootPane());        
         carrega_hora();
         timer1.start();
     }

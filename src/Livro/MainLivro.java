@@ -6,6 +6,7 @@
 package Livro;
 import Cliente.Atualiza;
 import javax.swing.*;
+import Form_cadastro.*;
 
 /**
  *
@@ -15,6 +16,7 @@ public class MainLivro extends javax.swing.JFrame {
 
     public MainLivro() {
         initComponents();
+        setLocationRelativeTo(getRootPane());
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -28,6 +30,10 @@ public class MainLivro extends javax.swing.JFrame {
         menu_atualizar = new javax.swing.JMenu();
         sb_alterar = new javax.swing.JMenuItem();
         menu_admin = new javax.swing.JMenu();
+        sb_cadautor = new javax.swing.JMenuItem();
+        sb_cadlivro = new javax.swing.JMenuItem();
+        sb_cadeditora = new javax.swing.JMenuItem();
+        sv_geruser = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -86,6 +92,24 @@ public class MainLivro extends javax.swing.JFrame {
         Bar_menu.add(menu_atualizar);
 
         menu_admin.setText("ADMIN");
+
+        sb_cadautor.setText("Cadastrar Autor");
+        sb_cadautor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sb_cadautorActionPerformed(evt);
+            }
+        });
+        menu_admin.add(sb_cadautor);
+
+        sb_cadlivro.setText("Cadastrar Livro");
+        menu_admin.add(sb_cadlivro);
+
+        sb_cadeditora.setText("Cadastrar Editora");
+        menu_admin.add(sb_cadeditora);
+
+        sv_geruser.setText("Gerenciar usuário");
+        menu_admin.add(sv_geruser);
+
         Bar_menu.add(menu_admin);
 
         setJMenuBar(Bar_menu);
@@ -143,6 +167,18 @@ public class MainLivro extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_sb_sairActionPerformed
 
+    private void sb_cadautorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sb_cadautorActionPerformed
+        Cad_autor internal_3 = Cad_autor.getInstance();
+        for(JInternalFrame c : dt_princ.getAllFrames()){
+            if (c.equals(internal_3)){
+                internal_3.setVisible(true);
+                return;
+            }
+        }
+        dt_princ.add(internal_3);
+        internal_3.setVisible(true);
+    }//GEN-LAST:event_sb_cadautorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -186,7 +222,11 @@ public class MainLivro extends javax.swing.JFrame {
     private javax.swing.JMenu menu_atualizar;
     private javax.swing.JMenu menu_principal;
     private javax.swing.JMenuItem sb_alterar;
+    private javax.swing.JMenuItem sb_cadautor;
+    private javax.swing.JMenuItem sb_cadeditora;
+    private javax.swing.JMenuItem sb_cadlivro;
     private javax.swing.JMenuItem sb_itempesquisar;
     private javax.swing.JMenuItem sb_sair;
+    private javax.swing.JMenuItem sv_geruser;
     // End of variables declaration//GEN-END:variables
 }
