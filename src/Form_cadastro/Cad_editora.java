@@ -5,6 +5,15 @@
  */
 package Form_cadastro;
 
+import DAO.Persistence;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import main.Login;
+
 /**
  *
  * @author Masds
@@ -24,6 +33,11 @@ public class Cad_editora extends javax.swing.JInternalFrame {
             form = new Cad_editora();
         }
         return form;
+    }
+    
+    private void limpaform(){
+        txt_nome.setText("");
+        txt_cnpj.setText("");
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,6 +63,11 @@ public class Cad_editora extends javax.swing.JInternalFrame {
         lb_cnpj.setText("CNPJ:");
 
         bt_cadastrar.setText("CADASTRAR");
+        bt_cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,6 +131,32 @@ public class Cad_editora extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrarActionPerformed
+Persistence conexao = new Persistence();
+        conexao.criaConexao();
+        ResultSet result = conexao.executaSQL("select * from editora where cnpj='"+txt_cnpj.getText()+"'");
+        try {
+        Boolean teste = result.first();
+            if(!teste){
+                String sql = "INSERT INTO editora(nome,cnpj) VALUES(?,?)";
+                try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+                stmt.setString(1, txt_nome.getText());
+                stmt.setString(2, txt_cnpj.getText());
+                stmt.execute();
+                JOptionPane.showMessageDialog(null, "A Editora "+txt_nome.getText()+ " Foi adicionada!");
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        } limpaform();
+        }else{
+            if(!"".equals(txt_cnpj.getText())){
+            JOptionPane.showMessageDialog(null, "Esta Editora ja foi cadastrada");
+            limpaform();
+        }}} catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        conexao.fechaConexao();
+    }//GEN-LAST:event_bt_cadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

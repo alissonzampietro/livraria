@@ -5,6 +5,15 @@
  */
 package Form_cadastro;
 
+import DAO.Persistence;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import main.Login;
+
 /**
  *
  * @author Masds
@@ -16,6 +25,8 @@ public class Ger_user extends javax.swing.JInternalFrame {
      */
     public Ger_user() {
         initComponents();
+        txt_pass.setVisible(false);
+        lb_senha.setVisible(false);
     }
 
     private static Ger_user form=null;
@@ -25,6 +36,11 @@ public class Ger_user extends javax.swing.JInternalFrame {
         }
         return form;
     }
+    
+    private void limpaform(){
+        txt_usuario.setText("");
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -50,10 +66,20 @@ public class Ger_user extends javax.swing.JInternalFrame {
         lb_usuario.setText("Usuário:");
 
         jButton1.setText("PROCURAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         lb_senha.setText("Senha:");
 
         bt_atualiza.setText("ATUALIZAR");
+        bt_atualiza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_atualizaActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -152,6 +178,60 @@ public class Ger_user extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Persistence conexao = new Persistence();
+        conexao.criaConexao();      
+        ResultSet result = conexao.executaSQL("select * from usuarios where login='"+txt_usuario.getText()+"'");
+        try {
+        Boolean teste = result.first();
+            if(!teste){
+                if(!"".equals(txt_usuario.getText())){
+                JOptionPane.showMessageDialog(null, "Este Usuario não Existe");
+                limpaform();
+                }}}catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+            Boolean teste = result.first();
+            if(teste){
+                    if(!"".equals(txt_usuario.getText())){
+            JOptionPane.showMessageDialog(null, "Este Usuario Existe");
+            txt_pass.setVisible(true);
+            lb_senha.setVisible(true);
+            }
+            }}catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        conexao.fechaConexao();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void bt_atualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_atualizaActionPerformed
+        Persistence conexao = new Persistence();
+        conexao.criaConexao();      
+        ResultSet result = conexao.executaSQL("select * from usuarios where login='"+txt_usuario.getText()+"'");
+        try{
+        Boolean teste = result.first();
+            if(teste){
+                String sql = "update usuarios set senha = '"+txt_pass.getText()+"' where login = '"+txt_usuario.getText()+"'";
+                try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+                stmt.execute();
+                JOptionPane.showMessageDialog(null, "Senha alterada!");
+                }catch(SQLException u) {
+                    throw new RuntimeException(u);
+        }}}catch(SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            if(ck_admin.isSelected()){
+                String sql = "update usuarios set fk_tipo_usuario = 2 where login = '"+txt_usuario.getText()+"'";
+                try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+                stmt.execute();
+                JOptionPane.showMessageDialog(null, "O usuario: "+txt_usuario.getText()+" tornou-se um admin");
+                }catch(SQLException u) {
+                    throw new RuntimeException(u);
+            }
+            }
+    }//GEN-LAST:event_bt_atualizaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
