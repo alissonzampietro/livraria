@@ -26,6 +26,7 @@ public class MainLivro extends javax.swing.JFrame {
         Bar_menu = new javax.swing.JMenuBar();
         menu_principal = new javax.swing.JMenu();
         sb_itempesquisar = new javax.swing.JMenuItem();
+        sb_mvendidos = new javax.swing.JMenuItem();
         sb_sair = new javax.swing.JMenuItem();
         menu_atualizar = new javax.swing.JMenu();
         sb_alterar = new javax.swing.JMenuItem();
@@ -65,6 +66,14 @@ public class MainLivro extends javax.swing.JFrame {
             }
         });
         menu_principal.add(sb_itempesquisar);
+
+        sb_mvendidos.setText("+ Vendidos");
+        sb_mvendidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sb_mvendidosActionPerformed(evt);
+            }
+        });
+        menu_principal.add(sb_mvendidos);
 
         sb_sair.setText("Sair");
         sb_sair.addActionListener(new java.awt.event.ActionListener() {
@@ -262,6 +271,18 @@ public class MainLivro extends javax.swing.JFrame {
         internal_7.setVisible(true);
     }//GEN-LAST:event_sb_geruserActionPerformed
 
+    private void sb_mvendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sb_mvendidosActionPerformed
+        Livro_mvendidos internal_8 = Livro_mvendidos.getInstance();
+        for(JInternalFrame h : dt_princ.getAllFrames()){
+            if (h.equals(internal_8)){
+                internal_8.setVisible(true);
+                return;
+            }
+        }
+        dt_princ.add(internal_8);
+        internal_8.setVisible(true);
+    }//GEN-LAST:event_sb_mvendidosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -311,6 +332,7 @@ public class MainLivro extends javax.swing.JFrame {
     private javax.swing.JMenuItem sb_cadlivro;
     private javax.swing.JMenuItem sb_geruser;
     private javax.swing.JMenuItem sb_itempesquisar;
+    private javax.swing.JMenuItem sb_mvendidos;
     private javax.swing.JMenuItem sb_sair;
     // End of variables declaration//GEN-END:variables
 }
