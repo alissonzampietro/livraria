@@ -18,7 +18,7 @@ public class CategoriaDAO {
         Integer retorno = null;
         Persistence conexao = new Persistence();
         conexao.criaConexao();
-        ResultSet retornoQuery = conexao.executaSQL("select * from categoria where nome like '" + nome + "%'");
+        ResultSet retornoQuery = conexao.executaSQL("select * from categoria where nome_categoria like '" + nome + "%'");
         if(retornoQuery.next()){
             retorno = retornoQuery.getInt("id_categoria");
         }

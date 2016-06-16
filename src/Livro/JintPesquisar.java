@@ -119,17 +119,17 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Id Livro", "Titulo", "Unidades"
+                "Id Livro", "Titulo", "Autor", "Categoria", "Editora", "Unidades"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, true, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -238,23 +238,22 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         Integer idCategoria = null;
         Integer idEditora = null;
         String categoria = (String) cb_categorias.getSelectedItem();
-        String consultaBase = "select l.* from livros l";
+        String consultaBase = "select l.*,e.nome_editora,a.nome_autor,c.nome_categoria from livros l inner join editora e on l.fk_editora = e.id_editora \n" +
+                                "inner join livro_x_autor la on l.id_livro = la.fk_livro \n" +
+                                "inner join autor a on la.fk_autor = a.id_autor\n" +
+                                "inner join livro_x_categoria lc on l.id_livro = lc.fk_livro\n" +
+                                "inner join categoria c on lc.fk_categoria = c.id_categoria";
         String consultaComplementar = "";
         String condicional = "";
-        String join = "";
-        String complementar = "";
         
         if (!"TODOS".equals(categoria)){
-            System.out.println("OI");
             CategoriaDAO cat = new CategoriaDAO();
             try {
                 idCategoria = cat.retornaId(categoria);
             } catch (SQLException ex) {
                 Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
             }
-            join += " inner join livro_x_categoria lc on l.id_livro = lc.fk_livro";
             condicional += " where lc.fk_categoria = '" + idCategoria + "'";
-            System.out.println("Categoria:" + condicional);
         }
         
         if(rad_livro.isSelected()){
@@ -263,8 +262,6 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
             }else{
                 condicional += " where l.titulo like '" + txt_pesquisar.getText() + "'";
             }
-            
-            System.out.println("Titulo:" + condicional);
         }
         
         if(rad_autor.isSelected()){
@@ -279,8 +276,6 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
             }else{
                 condicional += " where la.fk_autor = '" + idAutor + "'";
             }
-            join += " inner join livro_x_autor la on l.id_livro = la.fk_livro";
-            System.out.println("Autor:" + condicional);
         }
         
         if(rad_editora.isSelected()){
@@ -295,11 +290,10 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
             }else{
                 condicional += " where l.fk_editora = '" + idEditora + "'";
             }
-            System.out.println("Editora:" + condicional);
         }
        
         
-        consultaComplementar = consultaBase + join + condicional;
+        consultaComplementar = consultaBase + condicional;
         Persistence conexao = new Persistence();
         conexao.criaConexao();
         ResultSet retornoQuery = conexao.executaSQL(consultaComplementar);
@@ -307,7 +301,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         modelo.setNumRows(0);
         try {
             while(retornoQuery.next()){
-                modelo.addRow(new Object[]{retornoQuery.getString("id_livro"),retornoQuery.getString("titulo"),retornoQuery.getString("unidades")});
+                modelo.addRow(new Object[]{retornoQuery.getString("id_livro"),retornoQuery.getString("titulo"),retornoQuery.getString("nome_autor"),retornoQuery.getString("nome_categoria"),retornoQuery.getString("nome_editora"),retornoQuery.getString("unidades")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);

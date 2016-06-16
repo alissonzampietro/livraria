@@ -18,7 +18,7 @@ public class AutorDAO {
         Integer retorno = null;
         Persistence conexao = new Persistence();
         conexao.criaConexao();
-        ResultSet retornoQuery = conexao.executaSQL("select * from autor where nome like '" + nome + "%'");
+        ResultSet retornoQuery = conexao.executaSQL("select * from autor where nome_autor like '" + nome + "%'");
         if(retornoQuery.next()){
             retorno = retornoQuery.getInt("id_autor");
         }
