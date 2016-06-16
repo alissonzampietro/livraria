@@ -181,11 +181,8 @@
         <Component class="javax.swing.JComboBox" name="cb_categorias">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="1">
                 <StringItem index="0" value="TODOS"/>
-                <StringItem index="1" value="HQ"/>
-                <StringItem index="2" value="ROMANCE"/>
-                <StringItem index="3" value="DRAMA."/>
               </StringArray>
             </Property>
           </Properties>

@@ -6,6 +6,7 @@
 package Livro;
 import java.sql.ResultSet;
 import DAO.Persistence;
+import java.sql.SQLException;
 
 /**
  *
@@ -16,12 +17,19 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
     /**
      * Creates new form JintPesquisar
      */
-    public JintPesquisar() {
+    public JintPesquisar() throws SQLException {
         initComponents();
+        Persistence conexao = new Persistence();
+        conexao.criaConexao();
+        ResultSet retornoQuery;
+        retornoQuery = conexao.executaSQL("select * from categoria");
+            while(retornoQuery.next()){
+                cb_categorias.addItem(retornoQuery.getString(1) + " - " + retornoQuery.getString(2));
+            }
     }
     
     private static JintPesquisar form=null;
-    public static JintPesquisar getInstance(){
+    public static JintPesquisar getInstance() throws SQLException{
         if(form == null){
             form = new JintPesquisar();
         }
@@ -72,7 +80,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("após isto, selecione a categoria, digite o Titulo/Nome da Editora e clique em pesquisar");
 
-        cb_categorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "HQ", "ROMANCE", "DRAMA." }));
+        cb_categorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS" }));
         cb_categorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_categoriasActionPerformed(evt);
