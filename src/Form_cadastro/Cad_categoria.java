@@ -5,6 +5,13 @@
  */
 package Form_cadastro;
 
+import DAO.EnderecoDAO;
+import DAO.Persistence;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Masds
@@ -45,6 +52,11 @@ public class Cad_categoria extends javax.swing.JInternalFrame {
         lb_categoria.setText("CATEGORIA:");
 
         bt_cadastrar.setText("CADASTRAR");
+        bt_cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,6 +110,27 @@ public class Cad_categoria extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrarActionPerformed
+        Persistence conexao = new Persistence();
+        conexao.criaConexao();
+        //ResultSet result = conexao.executaSQL("select * from livros");
+        //while(result.next()){
+        //    if(result.getString("nome") == txt_categoria.getText()){            
+        //        JOptionPane.showMessageDialog(null, "Categoria já existe!");
+        //     }
+        //}
+        
+        String sql = "INSERT INTO categoria(nome) VALUES(?)";
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+            stmt.setString(1, txt_categoria.getText());
+            stmt.execute();
+            JOptionPane.showMessageDialog(null, "A categoria "+txt_categoria.getText()+ "Foi adicionada!");
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+        conexao.fechaConexao();
+    }//GEN-LAST:event_bt_cadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

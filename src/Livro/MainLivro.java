@@ -36,6 +36,7 @@ public class MainLivro extends javax.swing.JFrame {
         sb_cadeditora = new javax.swing.JMenuItem();
         sb_geruser = new javax.swing.JMenuItem();
         sb_cadcat = new javax.swing.JMenuItem();
+        sb_verestoque = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LIVRARIA VIRTUAL - BY MATHEUS E ALISSON");
@@ -148,6 +149,14 @@ public class MainLivro extends javax.swing.JFrame {
             }
         });
         menu_admin.add(sb_cadcat);
+
+        sb_verestoque.setText("Verificar Estoque");
+        sb_verestoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sb_verestoqueActionPerformed(evt);
+            }
+        });
+        menu_admin.add(sb_verestoque);
 
         Bar_menu.add(menu_admin);
 
@@ -283,6 +292,18 @@ public class MainLivro extends javax.swing.JFrame {
         internal_8.setVisible(true);
     }//GEN-LAST:event_sb_mvendidosActionPerformed
 
+    private void sb_verestoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sb_verestoqueActionPerformed
+        Controle_stoque internal_9 = Controle_stoque.getInstance();
+        for(JInternalFrame j : dt_princ.getAllFrames()){
+            if (j.equals(internal_9)){
+                internal_9.setVisible(true);
+                return;
+            }
+        }
+        dt_princ.add(internal_9);
+        internal_9.setVisible(true);
+    }//GEN-LAST:event_sb_verestoqueActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -334,5 +355,6 @@ public class MainLivro extends javax.swing.JFrame {
     private javax.swing.JMenuItem sb_itempesquisar;
     private javax.swing.JMenuItem sb_mvendidos;
     private javax.swing.JMenuItem sb_sair;
+    private javax.swing.JMenuItem sb_verestoque;
     // End of variables declaration//GEN-END:variables
 }
