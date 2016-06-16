@@ -12,6 +12,7 @@ import DAO.CategoriaDAO;
 import DAO.EditoraDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,7 +30,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         ResultSet retornoQuery;
         retornoQuery = conexao.executaSQL("select * from categoria");
             while(retornoQuery.next()){
-                cb_categorias.addItem(retornoQuery.getString(1) + " - " + retornoQuery.getString(2));
+                cb_categorias.addItem(retornoQuery.getString(2));
             }
     }
     
@@ -63,6 +64,8 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         txt_pesquisar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         rad_autor = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setClosable(true);
         setTitle("PESQUISAR");
@@ -114,6 +117,27 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         grouptipo.add(rad_autor);
         rad_autor.setText("AUTOR");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id Livro", "Titulo", "Autor", "Categoria", "Editora", "Unidades"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -127,6 +151,10 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
                         .addGap(277, 277, 277)
                         .addComponent(lb_infoprinc)))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(bt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(258, 258, 258))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -149,12 +177,11 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cb_categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(23, 23, 23)
-                                .addComponent(txt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(bt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(258, 258, 258))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +204,9 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
                     .addComponent(txt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_pesquisar)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(172, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -205,7 +234,82 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cb_categoriasActionPerformed
 
     private void bt_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pesquisarActionPerformed
+<<<<<<< HEAD
  
+=======
+        Integer idAutor = null;
+        Integer idCategoria = null;
+        Integer idEditora = null;
+        String categoria = (String) cb_categorias.getSelectedItem();
+        String consultaBase = "select l.*,e.nome_editora,a.nome_autor,c.nome_categoria from livros l inner join editora e on l.fk_editora = e.id_editora \n" +
+                                "inner join livro_x_autor la on l.id_livro = la.fk_livro \n" +
+                                "inner join autor a on la.fk_autor = a.id_autor\n" +
+                                "inner join livro_x_categoria lc on l.id_livro = lc.fk_livro\n" +
+                                "inner join categoria c on lc.fk_categoria = c.id_categoria";
+        String consultaComplementar = "";
+        String condicional = "";
+        
+        if (!"TODOS".equals(categoria)){
+            CategoriaDAO cat = new CategoriaDAO();
+            try {
+                idCategoria = cat.retornaId(categoria);
+            } catch (SQLException ex) {
+                Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            condicional += " where lc.fk_categoria = '" + idCategoria + "'";
+        }
+        
+        if(rad_livro.isSelected()){
+            if(idCategoria != null){
+                condicional += " and l.titulo like '" + txt_pesquisar.getText() + "'";
+            }else{
+                condicional += " where l.titulo like '" + txt_pesquisar.getText() + "'";
+            }
+        }
+        
+        if(rad_autor.isSelected()){
+            AutorDAO autor = new AutorDAO();
+            try {
+                idAutor = autor.retornaId(txt_pesquisar.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(idCategoria != null){
+                condicional += " and la.fk_autor = '" + idAutor + "'";
+            }else{
+                condicional += " where la.fk_autor = '" + idAutor + "'";
+            }
+        }
+        
+        if(rad_editora.isSelected()){
+            EditoraDAO editora = new EditoraDAO();
+            try {
+                idEditora = editora.retornaId(txt_pesquisar.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(idCategoria != null){
+                condicional += " and l.fk_editora = '" + idEditora + "'";
+            }else{
+                condicional += " where l.fk_editora = '" + idEditora + "'";
+            }
+        }
+       
+        
+        consultaComplementar = consultaBase + condicional;
+        Persistence conexao = new Persistence();
+        conexao.criaConexao();
+        ResultSet retornoQuery = conexao.executaSQL(consultaComplementar);
+        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
+        modelo.setNumRows(0);
+        try {
+            while(retornoQuery.next()){
+                modelo.addRow(new Object[]{retornoQuery.getString("id_livro"),retornoQuery.getString("titulo"),retornoQuery.getString("nome_autor"),retornoQuery.getString("nome_categoria"),retornoQuery.getString("nome_editora"),retornoQuery.getString("unidades")});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+>>>>>>> 9a4a727a70422d7d34269c8768218a2fee4b47c2
     }//GEN-LAST:event_bt_pesquisarActionPerformed
 
     private void txt_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_pesquisarActionPerformed
@@ -219,6 +323,8 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lb_categoria;
     private javax.swing.JLabel lb_infoprinc;
     private javax.swing.JLabel lb_tipopesquisa;
