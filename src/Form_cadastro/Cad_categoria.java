@@ -10,7 +10,10 @@ import DAO.Persistence;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import main.Login;
 
 /**
  *
@@ -31,6 +34,10 @@ public class Cad_categoria extends javax.swing.JInternalFrame {
             form = new Cad_categoria();
         }
         return form;
+    }
+    
+    private void limpaform(){
+        txt_categoria.setText("");
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -114,20 +121,24 @@ public class Cad_categoria extends javax.swing.JInternalFrame {
     private void bt_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrarActionPerformed
         Persistence conexao = new Persistence();
         conexao.criaConexao();
-        //ResultSet result = conexao.executaSQL("select * from livros");
-        //while(result.next()){
-        //    if(result.getString("nome") == txt_categoria.getText()){            
-        //        JOptionPane.showMessageDialog(null, "Categoria já existe!");
-        //     }
-        //}
-        
-        String sql = "INSERT INTO categoria(nome) VALUES(?)";
-        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
-            stmt.setString(1, txt_categoria.getText());
-            stmt.execute();
-            JOptionPane.showMessageDialog(null, "A categoria "+txt_categoria.getText()+ "Foi adicionada!");
+        ResultSet result = conexao.executaSQL("select * from categoria where nome='"+txt_categoria.getText()+"'");
+        try {
+        Boolean teste = result.first();
+            if(!teste){
+                String sql = "INSERT INTO categoria(nome) VALUES(?)";
+                try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+                stmt.setString(1, txt_categoria.getText());
+                stmt.execute();
+                JOptionPane.showMessageDialog(null, "A categoria "+txt_categoria.getText()+ " Foi adicionada!");
         } catch (SQLException u) {
             throw new RuntimeException(u);
+        } limpaform();
+        }else{
+            if(!"".equals(txt_categoria.getText())){
+            JOptionPane.showMessageDialog(null, "Esta Categoria ja foi cadastrada");
+            limpaform();
+        }}} catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         conexao.fechaConexao();
     }//GEN-LAST:event_bt_cadastrarActionPerformed

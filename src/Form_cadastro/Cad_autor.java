@@ -5,6 +5,15 @@
  */
 package Form_cadastro;
 
+import DAO.Persistence;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import main.Login;
+
 /**
  *
  * @author Masds
@@ -25,6 +34,14 @@ public class Cad_autor extends javax.swing.JInternalFrame {
         }
         return form;
     }
+    
+    private void limpaform(){
+        txt_nome.setText("");
+        txt_dia.setText("");
+        txt_mes.setText("");
+        txt_ano.setText("");
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -57,6 +74,11 @@ public class Cad_autor extends javax.swing.JInternalFrame {
         lb_mesano.setText("/");
 
         bt_cadastrar.setText("CADASTRAR");
+        bt_cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -131,6 +153,34 @@ public class Cad_autor extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrarActionPerformed
+        String conc = ""+txt_dia.getText()+"/"+txt_mes.getText()+"/"+txt_ano.getText()+"";
+        Persistence conexao = new Persistence();
+        conexao.criaConexao();      
+        ResultSet result = conexao.executaSQL("select * from autor where nome_autor='"+txt_nome.getText()+"'");
+        try {
+        Boolean teste = result.first();
+            if(!teste){
+                String sql = "INSERT INTO autor(nome_autor,anoNascimento) VALUES(?,?)";
+        try (PreparedStatement stmt = conexao.getConexao().prepareStatement(sql)) {
+            stmt.setString(1, txt_nome.getText());
+            stmt.setString(2, conc);
+            stmt.execute();
+            JOptionPane.showMessageDialog(null, "O Autor "+txt_nome.getText()+ " Foi adicionado!");
+        } catch (SQLException u) {
+            throw new RuntimeException(u);
+        }
+        }else{
+             if(!"".equals(txt_nome.getText())){
+            JOptionPane.showMessageDialog(null, "Este Autor ja foi cadastrado");
+            limpaform();
+             }}
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        conexao.fechaConexao();
+    }//GEN-LAST:event_bt_cadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
