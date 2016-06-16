@@ -34,5 +34,9 @@ public class UsuarioDAO {
         conexao.fechaConexao();
         return retorno;
     }
+    
+    public void retornaUltimaInsercao(){
+        
+    }
 
 }
