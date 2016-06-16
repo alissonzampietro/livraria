@@ -17,8 +17,8 @@ public class EditoraDAO {
         Integer retorno = null;
         Persistence conexao = new Persistence();
         conexao.criaConexao();
-        ResultSet retornoQuery = conexao.executaSQL("select * from editora where nome = '" + nome + "'");
-        if(retornoQuery.first()){
+        ResultSet retornoQuery = conexao.executaSQL("select * from editora where nome like '" + nome + "%'");
+        if(retornoQuery.next()){
             retorno = retornoQuery.getInt(1);
         }
         return retorno;
