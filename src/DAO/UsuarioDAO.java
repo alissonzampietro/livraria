@@ -20,6 +20,7 @@ public class UsuarioDAO {
 
     public Boolean inserir(Cliente usuario, Endereco endereco) {
         Boolean retorno;
+        Integer idUsuario;
         Persistence conexao = new Persistence();
         conexao.criaConexao();
         String sql = "INSERT INTO usuarios(login,senha,nome_usuario,sobrenome_usuario,cpf) VALUES(?,?,?,?,?)";
@@ -30,11 +31,13 @@ public class UsuarioDAO {
             stmt.setString(4, usuario.getSobrenome());
             stmt.setString(5, usuario.getCpf());
             retorno = stmt.execute();
-            this.retornaUltimaInsercao(conexao);
+            idUsuario = this.retornaUltimaInsercao(conexao);
         } catch (SQLException u) {
             throw new RuntimeException(u);
         }
         conexao.fechaConexao();
+        EnderecoDAO novoLocal = new EnderecoDAO();
+        novoLocal.inserir(endereco, idUsuario);
         return retorno;
     }
     
