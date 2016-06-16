@@ -211,7 +211,9 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         String campo = "";
         String categoria = (String) cb_categorias.getSelectedItem();
         System.out.println(cb_categorias.getSelectedItem());
-        String consultaCategoria = "select * from categoria";
+        String consultaBase = "select * from livros l";
+        String condicional = "where ";
+        String join = "";
         if (!"TODOS".equals(categoria)){
             CategoriaDAO cat = new CategoriaDAO();
             try {
@@ -219,6 +221,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
             }
+            join += " inner join livros_x_categoria lc on l.idLivro = lc.fk_livro";
         }
         
         if(rad_editora.isSelected()){
@@ -228,6 +231,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
             }
+            join += " inner join livros_x_editora le on l.idLivro = le.fk_livro";
         }
         if(rad_autor.isSelected()){
             AutorDAO autor = new AutorDAO();
@@ -236,6 +240,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
             }
+            join += " inner join livros_x_autor la on l.idLivro = la.fk_livro";
         }
         Persistence conexao = new Persistence();
         conexao.criaConexao();
