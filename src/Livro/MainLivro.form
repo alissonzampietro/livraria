@@ -52,6 +52,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="ADMIN"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_adminActionPerformed"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="sb_cadautor">
               <Properties>
@@ -65,16 +68,30 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar Livro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sb_cadlivroActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="sb_cadeditora">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar Editora"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sb_cadeditoraActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="sv_geruser">
+            <MenuItem class="javax.swing.JMenuItem" name="sb_geruser">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerenciar usu&#xe1;rio"/>
               </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="sb_cadcat">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Categoria"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sb_cadcatActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

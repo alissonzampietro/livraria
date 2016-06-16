@@ -33,7 +33,8 @@ public class MainLivro extends javax.swing.JFrame {
         sb_cadautor = new javax.swing.JMenuItem();
         sb_cadlivro = new javax.swing.JMenuItem();
         sb_cadeditora = new javax.swing.JMenuItem();
-        sv_geruser = new javax.swing.JMenuItem();
+        sb_geruser = new javax.swing.JMenuItem();
+        sb_cadcat = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -92,6 +93,11 @@ public class MainLivro extends javax.swing.JFrame {
         Bar_menu.add(menu_atualizar);
 
         menu_admin.setText("ADMIN");
+        menu_admin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_adminActionPerformed(evt);
+            }
+        });
 
         sb_cadautor.setText("Cadastrar Autor");
         sb_cadautor.addActionListener(new java.awt.event.ActionListener() {
@@ -102,13 +108,31 @@ public class MainLivro extends javax.swing.JFrame {
         menu_admin.add(sb_cadautor);
 
         sb_cadlivro.setText("Cadastrar Livro");
+        sb_cadlivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sb_cadlivroActionPerformed(evt);
+            }
+        });
         menu_admin.add(sb_cadlivro);
 
         sb_cadeditora.setText("Cadastrar Editora");
+        sb_cadeditora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sb_cadeditoraActionPerformed(evt);
+            }
+        });
         menu_admin.add(sb_cadeditora);
 
-        sv_geruser.setText("Gerenciar usuário");
-        menu_admin.add(sv_geruser);
+        sb_geruser.setText("Gerenciar usuário");
+        menu_admin.add(sb_geruser);
+
+        sb_cadcat.setText("Cadastrar Categoria");
+        sb_cadcat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sb_cadcatActionPerformed(evt);
+            }
+        });
+        menu_admin.add(sb_cadcat);
 
         Bar_menu.add(menu_admin);
 
@@ -179,6 +203,45 @@ public class MainLivro extends javax.swing.JFrame {
         internal_3.setVisible(true);
     }//GEN-LAST:event_sb_cadautorActionPerformed
 
+    private void menu_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_adminActionPerformed
+    }//GEN-LAST:event_menu_adminActionPerformed
+
+    private void sb_cadlivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sb_cadlivroActionPerformed
+        Cad_livro internal_4 = Cad_livro.getInstance();
+        for(JInternalFrame d : dt_princ.getAllFrames()){
+            if (d.equals(internal_4)){
+                internal_4.setVisible(true);
+                return;
+            }
+        }
+        dt_princ.add(internal_4);
+        internal_4.setVisible(true);
+    }//GEN-LAST:event_sb_cadlivroActionPerformed
+
+    private void sb_cadcatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sb_cadcatActionPerformed
+        Cad_categoria internal_5 = Cad_categoria.getInstance();
+        for(JInternalFrame e : dt_princ.getAllFrames()){
+            if (e.equals(internal_5)){
+                internal_5.setVisible(true);
+                return;
+            }
+        }
+        dt_princ.add(internal_5);
+        internal_5.setVisible(true);
+    }//GEN-LAST:event_sb_cadcatActionPerformed
+
+    private void sb_cadeditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sb_cadeditoraActionPerformed
+        Cad_editora internal_6 = Cad_editora.getInstance();
+        for(JInternalFrame f : dt_princ.getAllFrames()){
+            if (f.equals(internal_6)){
+                internal_6.setVisible(true);
+                return;
+            }
+        }
+        dt_princ.add(internal_6);
+        internal_6.setVisible(true);
+    }//GEN-LAST:event_sb_cadeditoraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -223,10 +286,11 @@ public class MainLivro extends javax.swing.JFrame {
     private javax.swing.JMenu menu_principal;
     private javax.swing.JMenuItem sb_alterar;
     private javax.swing.JMenuItem sb_cadautor;
+    private javax.swing.JMenuItem sb_cadcat;
     private javax.swing.JMenuItem sb_cadeditora;
     private javax.swing.JMenuItem sb_cadlivro;
+    private javax.swing.JMenuItem sb_geruser;
     private javax.swing.JMenuItem sb_itempesquisar;
     private javax.swing.JMenuItem sb_sair;
-    private javax.swing.JMenuItem sv_geruser;
     // End of variables declaration//GEN-END:variables
 }
