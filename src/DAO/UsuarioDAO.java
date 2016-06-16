@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class UsuarioDAO {
 
-    public Boolean adiciona(Cliente usuario) {
+    public Boolean inserir(Cliente usuario) {
         Boolean retorno;
         Persistence conexao = new Persistence();
         conexao.criaConexao();
@@ -28,24 +28,11 @@ public class UsuarioDAO {
             stmt.setString(4, usuario.getSobrenome());
             stmt.setString(5, usuario.getCpf());
             retorno = stmt.execute();
-            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    user.setId(generatedKeys.getLong(1));
-                }
-                else {
-                    throw new SQLException("Creating user failed, no ID obtained.");
-                }
-            }
         } catch (SQLException u) {
             throw new RuntimeException(u);
         }
         conexao.fechaConexao();
         return retorno;
-    }
-
-    public Cliente busca(Cliente cliente) {
-
-        return cliente;
     }
 
 }

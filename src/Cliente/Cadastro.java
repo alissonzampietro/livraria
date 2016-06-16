@@ -273,7 +273,7 @@ public class Cadastro extends javax.swing.JFrame {
             novo.setCep(txt_cep.getText());
             novo.setSenha(txt_senha.getText());
             UsuarioDAO cadastrar = new UsuarioDAO();
-            cadastrar.adiciona(novo);
+            cadastrar.inserir(novo);
             JOptionPane.showMessageDialog(null, "USUARIO CADASTRADO COM SUCESSO!");
             this.limpaForm();
         }else{
