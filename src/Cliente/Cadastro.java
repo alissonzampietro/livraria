@@ -19,6 +19,7 @@ public class Cadastro extends javax.swing.JFrame {
     String Hora;
     public Cadastro() {
         initComponents();
+        setLocationRelativeTo(null);
         carrega_hora();
         timer2.start();
     }
@@ -63,6 +64,8 @@ public class Cadastro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastrar Novo Usuário");
+        setLocation(new java.awt.Point(0, 0));
+        setResizable(false);
 
         painel_princ.setBackground(new java.awt.Color(0, 204, 204));
 
@@ -272,15 +275,26 @@ public class Cadastro extends javax.swing.JFrame {
             novo.setSenha(txt_senha.getText());
             UsuarioDAO cadastrar = new UsuarioDAO();
             cadastrar.adiciona(novo);
+            JOptionPane.showMessageDialog(null, "USUARIO CADASTRADO COM SUCESSO!");
+            this.limpaForm();
         }else{
-            JOptionPane.showMessageDialog(null, "Por favor, verifique se há algum campo em branco!");
+            JOptionPane.showMessageDialog(null, "POR FAVOR, VERIFIQUE SE HÁ ALGUM CAMPO EM BRANCO.");
         }
     }//GEN-LAST:event_bt_cadastrarActionPerformed
 
     private void txt_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cpfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cpfActionPerformed
-
+    
+    private void limpaForm(){
+        txt_cep.setText("");
+        txt_cpf.setText("");
+        txt_endereco.setText("");
+        txt_nome.setText("");
+        txt_senha.setText("");
+        txt_sobrenome.setText("");
+        txt_usuario.setText("");
+    }
     /**
      * @param args the command line arguments
      */

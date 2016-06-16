@@ -22,6 +22,7 @@ public class Login extends javax.swing.JFrame {
     int count = 0;
 
     public Login() {
+        setLocationRelativeTo(null);
         initComponents();
         carrega_hora();
         timer1.start();
@@ -229,12 +230,12 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Bem vindo "+txt_usuario.getText());
                     this.dispose();
                 }else{
-                    JOptionPane.showMessageDialog(null, "Por favor, verifique se há algum campo em branco!");
+                    JOptionPane.showMessageDialog(null, "POR FAVOR, VERIFIQUE SE HÁ ALGUM CAMPO EM BRANCO.");
                     txt_usuario.setText("");
                     txt_senha.setText("");
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
+                JOptionPane.showMessageDialog(null, "USUÁRIO NÃO ENCONTRADO.");
                 txt_usuario.setText("");
                 txt_senha.setText("");
             }
