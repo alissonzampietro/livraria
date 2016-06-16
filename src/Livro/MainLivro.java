@@ -37,6 +37,7 @@ public class MainLivro extends javax.swing.JFrame {
         sb_cadcat = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LIVRARIA VIRTUAL - BY MATHEUS E ALISSON");
         setResizable(false);
 
         javax.swing.GroupLayout dt_princLayout = new javax.swing.GroupLayout(dt_princ);
@@ -124,6 +125,11 @@ public class MainLivro extends javax.swing.JFrame {
         menu_admin.add(sb_cadeditora);
 
         sb_geruser.setText("Gerenciar usuário");
+        sb_geruser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sb_geruserActionPerformed(evt);
+            }
+        });
         menu_admin.add(sb_geruser);
 
         sb_cadcat.setText("Cadastrar Categoria");
@@ -142,7 +148,9 @@ public class MainLivro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dt_princ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(dt_princ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,6 +249,18 @@ public class MainLivro extends javax.swing.JFrame {
         dt_princ.add(internal_6);
         internal_6.setVisible(true);
     }//GEN-LAST:event_sb_cadeditoraActionPerformed
+
+    private void sb_geruserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sb_geruserActionPerformed
+        Ger_user internal_7 = Ger_user.getInstance();
+        for(JInternalFrame g : dt_princ.getAllFrames()){
+            if (g.equals(internal_7)){
+                internal_7.setVisible(true);
+                return;
+            }
+        }
+        dt_princ.add(internal_7);
+        internal_7.setVisible(true);
+    }//GEN-LAST:event_sb_geruserActionPerformed
 
     /**
      * @param args the command line arguments
