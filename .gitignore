@@ -10,6 +10,8 @@ nbactions.xml
 .nb-gradle/
 .build/
 build/*
+build/
+build/built-jar.properties
 
 
 ### Java ###
