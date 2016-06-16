@@ -80,7 +80,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="lb_tipopesquisa" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rad_autor" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="rad_editora" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -119,7 +119,7 @@
                       <Component id="lb_tipopesquisa" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rad_editora" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rad_livro" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rad_autor" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -219,7 +219,7 @@
             <Property name="text" type="java.lang.String" value="Para pesquisar, primeiro selecione se quer pesquisar por EDITORA ou T&#xcd;TULO,"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+        <Component class="javax.swing.JRadioButton" name="rad_autor">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="ff" red="ff" type="rgb"/>

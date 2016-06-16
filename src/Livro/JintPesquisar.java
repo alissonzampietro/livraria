@@ -7,6 +7,10 @@ package Livro;
 import java.sql.ResultSet;
 import DAO.Persistence;
 import java.sql.SQLException;
+import DAO.AutorDAO;
+import DAO.CategoriaDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -57,7 +61,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         lb_categoria = new javax.swing.JLabel();
         txt_pesquisar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        rad_autor = new javax.swing.JRadioButton();
 
         setClosable(true);
         setTitle("PESQUISAR");
@@ -105,9 +109,9 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Para pesquisar, primeiro selecione se quer pesquisar por EDITORA ou TÍTULO,");
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 102));
-        grouptipo.add(jRadioButton1);
-        jRadioButton1.setText("AUTOR");
+        rad_autor.setBackground(new java.awt.Color(255, 255, 102));
+        grouptipo.add(rad_autor);
+        rad_autor.setText("AUTOR");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,7 +137,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lb_tipopesquisa)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton1)
+                                .addComponent(rad_autor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(rad_editora)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -164,7 +168,7 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
                     .addComponent(lb_tipopesquisa)
                     .addComponent(rad_editora)
                     .addComponent(rad_livro)
-                    .addComponent(jRadioButton1))
+                    .addComponent(rad_autor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_categoria)
@@ -200,16 +204,27 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cb_categoriasActionPerformed
 
     private void bt_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pesquisarActionPerformed
+        Integer idAutor = null;
+        Integer idCategoria = null;
         String campo = "";
-        String categoria ="";
-        if(rad_livro.isSelected()){
-            campo = "titulo";
+        String categoria = (String) cb_categorias.getSelectedItem();
+        System.out.println(cb_categorias.getSelectedItem());
+        String consultaCategoria = "select * from categoria";
+        if (!"TODOS".equals(categoria)){
+            CategoriaDAO cat = new CategoriaDAO();
+            try {
+                idCategoria = cat.retornaId(categoria);
+            } catch (SQLException ex) {
+                Logger.getLogger(JintPesquisar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
         if(rad_editora.isSelected()){
             campo = "editora";
         }
-        if(rad_editora.isSelected()){
-            campo = "autor";
+        if(rad_autor.isSelected()){
+            AutorDAO autor = new AutorDAO();
+            idAutor = autor.retornaId(rad_autor.getText());
         }
         Persistence conexao = new Persistence();
         conexao.criaConexao();
@@ -227,10 +242,10 @@ public class JintPesquisar extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JLabel lb_categoria;
     private javax.swing.JLabel lb_infoprinc;
     private javax.swing.JLabel lb_tipopesquisa;
+    private javax.swing.JRadioButton rad_autor;
     private javax.swing.JRadioButton rad_editora;
     private javax.swing.JRadioButton rad_livro;
     private javax.swing.JTextField txt_pesquisar;
