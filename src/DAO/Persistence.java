@@ -6,7 +6,6 @@
 package DAO;
 import java.sql.*;
 import javax.swing.*;
-import java.util.*;
 /**
  *
  * @author Masds
@@ -99,6 +98,10 @@ public class Persistence {
 
     public void setPorta(int porta) {
         this.porta = porta;
+    }
+    
+    public Statement retornarStatement() throws SQLException{
+        return this.conexao.createStatement();
     }
     
     public ResultSet executaSQL(String sql){
